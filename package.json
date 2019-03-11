@@ -1,0 +1,20 @@
+{
+  "name": "my-rn-sound",
+  "version": "1.0.0",
+  "description": "my-rn-sound",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "my-rn-sound"
+  ],
+  "author": "Quan Trinh Van",
+  "license": "Quan Trinh Van",
+  "nativePackage": true,
+  "dependencies": {},
+  "devDependencies": {
+  },
+  "peerDependencies": {}
+}
