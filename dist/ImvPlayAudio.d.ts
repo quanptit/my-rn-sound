@@ -6,7 +6,7 @@ interface Props {
     style?: StyleProp<ViewStyle>;
     textStyle?: StyleProp<TextStyle>;
     /** Có thể là subPath hoặc Full URL*/
-    audio: string;
+    audio?: string;
     PathUtils: IPathUtilsModule;
     isFromResourceDir?: boolean;
     voca?: string;
