@@ -47,8 +47,8 @@ export class ImvPlayAudio extends PureComponent {
 }
 //region variable + default props
 ImvPlayAudio.defaultProps = {
-    audioImg: require('../../assets/audio_large_ic.png'),
-    audioImgActive: require('../../assets/audio_large_ic_active.png'),
+    audioImg: require('../assets/audio_large_ic.png'),
+    audioImgActive: require('../assets/audio_large_ic_active.png'),
     imgWidth: 35,
     imgHeight: 35
 };

@@ -27,8 +27,8 @@ interface State {
 export class ImvPlayAudio extends PureComponent<Props, State> implements IPlaySoundComponent {
     //region variable + default props
     static defaultProps = {
-        audioImg: require('../../assets/audio_large_ic.png'),
-        audioImgActive: require('../../assets/audio_large_ic_active.png'),
+        audioImg: require('../assets/audio_large_ic.png'),
+        audioImgActive: require('../assets/audio_large_ic_active.png'),
         imgWidth: 35,
         imgHeight: 35
     };

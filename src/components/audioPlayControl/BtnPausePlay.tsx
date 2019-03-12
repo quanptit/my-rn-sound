@@ -29,7 +29,7 @@ export default class BtnPausePlay extends ComponentUpdateOnlyState<Props, State>
 
     render() {
         let img = this.state.statePlayer === "playing" ? require('../../../assets/ic_player_pause.png')
-            : require('../../../assets/ic_player_play.png')
+            : require('../../../assets/ic_player_play.png');
         return (
             <Touchable style={[{width: 45, height: 45}, styles.center, this.props.style]}
                        onPress={this.props.onPress}>
