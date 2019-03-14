@@ -34,26 +34,6 @@ public class RNSoundModule extends ReactContextBaseJavaModule {
         return "RNSound";
     }
 
-    //region Android Custom Sound Play
-    @ReactMethod
-    public void playGameOver() {
-        //TODO if has sound
-//        AudioPlayerInRaw.playRawAudio(R.raw.gameover);
-    }
-
-    @ReactMethod
-    public void playGameWin() {
-        //TODO if has sound
-//        AudioPlayerInRaw.playRawAudio(R.raw.win);
-    }
-
-    @ReactMethod
-    public void openMultiCard() {
-        //TODO if has sound
-//        AudioPlayerInRaw.playRawAudio(R.raw.open_multi_card);
-    }
-    //endregion
-
     @ReactMethod
     public void prepare(final String fileName, final Integer key, final boolean isFromResourceDir, final Callback callback) {
         MyMediaPlayer player = new MyMediaPlayer();
