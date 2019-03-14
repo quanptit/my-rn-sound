@@ -59,8 +59,7 @@ export default class Sound {
             RNSound.prepare(this._filename, this._key, isStaticSound === true ? 1 : 0, isFromResourceDir === true ? 1 : 0, (error, props) => {
                 prepareComplete(error, props)
             });
-        }
-        else
+        } else
             RNSound.prepare(this._filename, this._key, isFromResourceDir, (error, props) => {
                 prepareComplete(error, props)
             })
@@ -68,7 +67,7 @@ export default class Sound {
 
     setLooping(isLooping: boolean) {
         if (this._loaded) {
-            if (isIOS) {
+            if (isIOS()) {
                 // this.setNumberOfLoops(-1);
                 RNSound.setNumberOfLoops(this._key, -1)
             } else
@@ -131,7 +130,7 @@ export default class Sound {
     setVolume(value) {
         this._volume = value
         if (this._loaded) {
-            if (!isIOS) {
+            if (!isIOS()) {
                 RNSound.setVolume(this._key, value, value)
             } else {
                 RNSound.setVolume(this._key, value)
@@ -158,7 +157,7 @@ export default class Sound {
     setNumberOfLoops(value) {
         this._numberOfLoops = value
         if (this._loaded) {
-            if (!isIOS) {
+            if (!isIOS()) {
                 RNSound.setLooping(this._key, !!value)
             } else {
                 RNSound.setNumberOfLoops(this._key, value)
@@ -170,7 +169,7 @@ export default class Sound {
     setSpeed(value) {
         this._speed = value
         if (this._loaded) {
-            if (isIOS) {
+            if (isIOS()) {
                 RNSound.setSpeed(this._key, value)
             }
         }
@@ -191,7 +190,7 @@ export default class Sound {
     }
 
     setCategory(value, mixWithOthers = false) {
-        if (isIOS) {
+        if (isIOS()) {
             RNSound.setCategory(value, mixWithOthers)
         }
     }
@@ -201,7 +200,7 @@ export default class Sound {
     }
 
     enableInSilenceMode(enabled) {
-        if (isIOS) {
+        if (isIOS()) {
             RNSound.enableInSilenceMode(enabled)
         }
     }

@@ -53,7 +53,7 @@ export default class Sound {
     }
     setLooping(isLooping) {
         if (this._loaded) {
-            if (isIOS) {
+            if (isIOS()) {
                 // this.setNumberOfLoops(-1);
                 RNSound.setNumberOfLoops(this._key, -1);
             }
@@ -107,7 +107,7 @@ export default class Sound {
     setVolume(value) {
         this._volume = value;
         if (this._loaded) {
-            if (!isIOS) {
+            if (!isIOS()) {
                 RNSound.setVolume(this._key, value, value);
             }
             else {
@@ -131,7 +131,7 @@ export default class Sound {
     setNumberOfLoops(value) {
         this._numberOfLoops = value;
         if (this._loaded) {
-            if (!isIOS) {
+            if (!isIOS()) {
                 RNSound.setLooping(this._key, !!value);
             }
             else {
@@ -143,7 +143,7 @@ export default class Sound {
     setSpeed(value) {
         this._speed = value;
         if (this._loaded) {
-            if (isIOS) {
+            if (isIOS()) {
                 RNSound.setSpeed(this._key, value);
             }
         }
@@ -161,7 +161,7 @@ export default class Sound {
         return this;
     }
     setCategory(value, mixWithOthers = false) {
-        if (isIOS) {
+        if (isIOS()) {
             RNSound.setCategory(value, mixWithOthers);
         }
     }
@@ -169,7 +169,7 @@ export default class Sound {
         RNSound.enable(enabled);
     }
     enableInSilenceMode(enabled) {
-        if (isIOS) {
+        if (isIOS()) {
             RNSound.enableInSilenceMode(enabled);
         }
     }
