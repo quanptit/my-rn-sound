@@ -13,7 +13,9 @@
   "author": "Quan Trinh Van",
   "license": "Quan Trinh Van",
   "nativePackage": true,
-  "dependencies": {},
+  "dependencies": {
+    "react-native-tts": "git+https://gitlab.com/react-native-js-lib/react-native-tts.git"
+  },
   "devDependencies": {
   },
   "peerDependencies": {}
