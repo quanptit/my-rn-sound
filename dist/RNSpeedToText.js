@@ -9,11 +9,12 @@ export default {
     initAndRequestPermisionAndShowDialogIfError() {
         if (this.isHasPermisionLuyenNoi)
             return undefined;
-        this.isHasPermisionLuyenNoi = true;
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             RNSpeedToText.initAndRequestPermision((isSuccess, errorMessage, errorCode) => {
-                if (isSuccess)
+                if (isSuccess) {
+                    this.isHasPermisionLuyenNoi = true;
                     resolve();
+                }
                 else {
                     if (isIOS())
                         DialogUtils.showInfoDialog("ERROR", errorMessage, {

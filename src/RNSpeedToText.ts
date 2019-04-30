@@ -10,14 +10,14 @@ export default {
     isHasPermisionLuyenNoi: false,
     initAndRequestPermisionAndShowDialogIfError(): Promise<void> {
         if (this.isHasPermisionLuyenNoi)
-            return undefined
-        this.isHasPermisionLuyenNoi = true
+            return undefined;
 
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             RNSpeedToText.initAndRequestPermision((isSuccess, errorMessage, errorCode) => { // errorCode: 1 => User denied
-                if (isSuccess)
+                if (isSuccess) {
+                    this.isHasPermisionLuyenNoi = true;
                     resolve();
-                else {
+                } else {
                     if (isIOS())
                         DialogUtils.showInfoDialog("ERROR", errorMessage, {
                             text: getStringsCommon().Ok.toUpperCase(), onPress: () => {
