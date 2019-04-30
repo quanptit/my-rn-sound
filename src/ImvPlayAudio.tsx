@@ -41,13 +41,13 @@ export class ImvPlayAudio extends PureComponent<Props, State> implements IPlaySo
 
     //endregion
 
-    async playAudio(completeCallback?: () => void) {
+    async playAudio(completeCallback?: () => void, text?: string) {
         this.completeCallback = completeCallback;
         let audioPath = this.props.audio;
         if (!isEmpty(audioPath)) {
             if (!this.props.isFromResourceDir)
                 audioPath = await this.props.PathUtils.getPathOnlineOrOffline(this.props.audio);
-            AppPlaySoundUtils.playAudioOrUsingTTS(this, audioPath, this.props.voca, this.props.isFromResourceDir);
+            AppPlaySoundUtils.playAudioOrUsingTTS(this, audioPath, text || this.props.voca, this.props.isFromResourceDir);
         }
     }
 

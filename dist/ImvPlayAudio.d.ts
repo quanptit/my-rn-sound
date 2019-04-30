@@ -29,7 +29,7 @@ export declare class ImvPlayAudio extends PureComponent<Props, State> implements
     };
     private completeCallback;
     constructor(props: any);
-    playAudio(completeCallback?: () => void): Promise<void>;
+    playAudio(completeCallback?: () => void, text?: string): Promise<void>;
     render(): JSX.Element;
     private _renderContent;
     setPlayingState(isPlaying: boolean): void;

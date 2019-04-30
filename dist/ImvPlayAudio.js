@@ -9,13 +9,13 @@ export class ImvPlayAudio extends PureComponent {
         this.state = { isPlaying: false };
     }
     //endregion
-    async playAudio(completeCallback) {
+    async playAudio(completeCallback, text) {
         this.completeCallback = completeCallback;
         let audioPath = this.props.audio;
         if (!isEmpty(audioPath)) {
             if (!this.props.isFromResourceDir)
                 audioPath = await this.props.PathUtils.getPathOnlineOrOffline(this.props.audio);
-            AppPlaySoundUtils.playAudioOrUsingTTS(this, audioPath, this.props.voca, this.props.isFromResourceDir);
+            AppPlaySoundUtils.playAudioOrUsingTTS(this, audioPath, text || this.props.voca, this.props.isFromResourceDir);
         }
     }
     render() {

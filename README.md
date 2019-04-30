@@ -1,5 +1,10 @@
-Base component: Chỉ những compoennt cơ bản nhất mới cho vào đây.
-All project sẽ tham chiếu đến
+### AppPlaySoundUtils
+play audio hoặc TTS đều sử dụng thông qua cái này
+
+### ImvPlayAudio
+control play audio, hiển thị hai trạng thái khi play và pause. 
+
+
 ## Installation
 
 ##### Thêm Vào package.json
