@@ -4,6 +4,7 @@ import Tts from 'react-native-tts'
 import RNSound from "./RNSound"
 import {Toast} from "my-rn-base-component";
 import {isEmpty, RNCommonUtils, sendError} from "my-rn-base-utils";
+import {getStringsCommon} from "my-rn-common-resource";
 
 let TTS_LANGUAGE_CODE;
 
@@ -84,28 +85,43 @@ export class AppPlaySoundUtils {
         TTS_LANGUAGE_CODE = ttsLanguageCode;
     }
 
-    private static _initTTS() {
-        if (this.hasInitTTS) return;
-        this.hasInitTTS = true;
+    private static _initTTS(callbackSuccess: VoidFunction) {
+        if (this.hasInitTTS) {
+            callbackSuccess();
+            return;
+        }
         if (TTS_LANGUAGE_CODE == null)
             sendError("TTS_LANGUAGE_CODE==null");
-
-        Tts.setDefaultLanguage(TTS_LANGUAGE_CODE || "en-US");
-        Tts.addEventListener('tts-finish', (event) => this.callbackPlayComplete(true));
-        Tts.addEventListener('tts-cancel', (event) => this.callbackPlayComplete(false));
+        Tts.getInitStatus().then(() => {
+            this.hasInitTTS = true;
+            Tts.setDefaultLanguage(TTS_LANGUAGE_CODE || "en-US");
+            Tts.addEventListener('tts-finish', (event) => this.callbackPlayComplete(true));
+            Tts.addEventListener('tts-cancel', (event) => this.callbackPlayComplete(false));
+            callbackSuccess();
+        }, (err) => {
+            if (err.code === 'no_engine')
+                try {
+                    Tts.requestInstallEngine();
+                } catch (e) {
+                    Toast.showLongBottom(getStringsCommon().has_error);
+                }
+            else
+                Toast.showLongBottom(getStringsCommon().has_error);
+        });
     }
 
     static ttsPlaySound(component: IPlaySoundComponent, text: string) {
-        this._initTTS();
-        this.releaseAll();
-        this.currentComponent = component;
-        this.currentComponent && this.currentComponent.setPlayingState(true);
-        try {
-            console.log("Play audio ttsPlaySound: " + text);
-            Tts.speak(text)
-        } catch (e) {
-            sendError(e)
-        }
+        this._initTTS(() => {
+            this.releaseAll();
+            this.currentComponent = component;
+            this.currentComponent && this.currentComponent.setPlayingState(true);
+            try {
+                console.log("Play audio ttsPlaySound: " + text);
+                Tts.speak(text)
+            } catch (e) {
+                sendError(e)
+            }
+        });
     }
 
     //endregion
