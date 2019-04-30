@@ -47,8 +47,8 @@ export class ImvPlayAudio extends PureComponent<Props, State> implements IPlaySo
         if (!isEmpty(audioPath)) {
             if (!this.props.isFromResourceDir)
                 audioPath = await this.props.PathUtils.getPathOnlineOrOffline(this.props.audio);
-            AppPlaySoundUtils.playAudioOrUsingTTS(this, audioPath, text || this.props.voca, this.props.isFromResourceDir);
         }
+        AppPlaySoundUtils.playAudioOrUsingTTS(this, audioPath, text || this.props.voca, this.props.isFromResourceDir);
     }
 
     render() {
