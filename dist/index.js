@@ -1,3 +1,4 @@
+export { AssetsUtils } from "./AssetsUtils";
 export { AudioPlayControl } from "./components/audioPlayControl/AudioPlayControl";
 export { default as SeekBarAudioPlayer } from "./components/audioPlayControl/SeekBarAudioPlayer";
 export { default as BtnPausePlay } from "./components/audioPlayControl/BtnPausePlay";
