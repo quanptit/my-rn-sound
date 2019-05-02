@@ -6,6 +6,7 @@ import Sound from "../../RNSound";
 import {RenderUtils} from "my-rn-base-component/dist/utils/RenderUtils";
 import {PreferenceUtils} from "my-rn-base-utils";
 import {PureComponentSkipFunction, Row, Touchable, ComboBox} from "my-rn-base-component";
+import {ManagerOneAudioPlayer} from "../../ManagerOneAudioPlayer";
 
 export interface AudioPlayControlRenderUtilsProps {
     renderPlayBtn: (style?) => ReactChild,
@@ -29,6 +30,8 @@ interface Props {
     currentSound?: Sound,
     style?: StyleProp<ViewStyle>
     overrideRender?: (params: AudioPlayControlRenderUtilsProps) => ReactChild
+    // true => Player sẽ có thể vẫn play khi có cái khác play đè lên
+    skipManagerOneAudioPlayer?: boolean
 }
 
 interface State {
@@ -83,11 +86,14 @@ export class AudioPlayControl extends PureComponentSkipFunction <Props, State> {
     }
 
     componentWillUnmount() {
+        ManagerOneAudioPlayer.unregisterAudioPlayer(this);
         this.releaseAudio(!this.props.disableAutoReleaseSound)
     }
 
     initAndPlayAudio() {
         console.log("AudioPlayControl: ", this.props.audio);
+        if (!this.props.skipManagerOneAudioPlayer)
+            ManagerOneAudioPlayer.startPlayAudio(this);
         this.props.callbackStart && this.props.callbackStart(this);
         this._stopTimerCheckCurrentTime();
         const myModule = new NativeEventEmitter(NativeModules.RNSound);

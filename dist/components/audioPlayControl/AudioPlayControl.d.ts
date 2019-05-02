@@ -23,6 +23,7 @@ interface Props {
     currentSound?: Sound;
     style?: StyleProp<ViewStyle>;
     overrideRender?: (params: AudioPlayControlRenderUtilsProps) => ReactChild;
+    skipManagerOneAudioPlayer?: boolean;
 }
 interface State {
     loopButton?: {

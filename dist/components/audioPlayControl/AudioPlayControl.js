@@ -6,6 +6,7 @@ import Sound from "../../RNSound";
 import { RenderUtils } from "my-rn-base-component/dist/utils/RenderUtils";
 import { PreferenceUtils } from "my-rn-base-utils";
 import { PureComponentSkipFunction, Row, Touchable, ComboBox } from "my-rn-base-component";
+import { ManagerOneAudioPlayer } from "../../ManagerOneAudioPlayer";
 export class AudioPlayControl extends PureComponentSkipFunction {
     //region ======== life ======
     constructor(props) {
@@ -42,10 +43,13 @@ export class AudioPlayControl extends PureComponentSkipFunction {
         this._startTimerCheckCurrentTime();
     }
     componentWillUnmount() {
+        ManagerOneAudioPlayer.unregisterAudioPlayer(this);
         this.releaseAudio(!this.props.disableAutoReleaseSound);
     }
     initAndPlayAudio() {
         console.log("AudioPlayControl: ", this.props.audio);
+        if (!this.props.skipManagerOneAudioPlayer)
+            ManagerOneAudioPlayer.startPlayAudio(this);
         this.props.callbackStart && this.props.callbackStart(this);
         this._stopTimerCheckCurrentTime();
         const myModule = new NativeEventEmitter(NativeModules.RNSound);
