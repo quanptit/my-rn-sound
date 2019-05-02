@@ -12,7 +12,7 @@ export class ManagerOneAudioPlayer {
 
     static startPlayAudio(player: AudioPlayControl) {
         if (player === this.playerCurrent) return;
-        this.playerCurrent.releaseAudio(true);
+        this.playerCurrent && this.playerCurrent.releaseAudio(true);
         this.playerCurrent = player;
     }
 
