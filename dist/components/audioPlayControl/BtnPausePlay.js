@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, View, StyleSheet } from 'react-native';
-import { ComponentUpdateOnlyState, Spinner, StyleUtils, Touchable } from "my-rn-base-component";
+import { Image, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { ComponentUpdateOnlyState, Spinner, StyleUtils } from "my-rn-base-component";
 const s = StyleUtils.getAllStyle();
 export default class BtnPausePlay extends ComponentUpdateOnlyState {
     constructor(props) {
@@ -16,10 +16,10 @@ export default class BtnPausePlay extends ComponentUpdateOnlyState {
     render() {
         let img = this.state.statePlayer === "playing" ? require('../../../assets/ic_player_pause.png')
             : require('../../../assets/ic_player_play.png');
-        return (<Touchable style={[{ width: 45, height: 45 }, styles.center, this.props.style]} onPress={this.props.onPress}>
+        return (<TouchableOpacity style={[{ width: 45, height: 45 }, styles.center, this.props.style]} onPress={this.props.onPress}>
                 <Image source={img} style={{ width: 45, height: 45, resizeMode: "cover" }}/>
                 {this._renderSpinner()}
-            </Touchable>);
+            </TouchableOpacity>);
     }
     _renderSpinner() {
         if (this.state.statePlayer === "buffering") {

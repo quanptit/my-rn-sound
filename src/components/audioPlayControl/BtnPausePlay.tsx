@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Image, View, StyleSheet, StyleProp, ViewStyle} from 'react-native'
+import {Image, View, StyleSheet, StyleProp, ViewStyle, TouchableOpacity} from 'react-native'
 import {ComponentUpdateOnlyState, Spinner, StyleUtils, Touchable} from "my-rn-base-component";
 
 const s = StyleUtils.getAllStyle();
@@ -31,11 +31,11 @@ export default class BtnPausePlay extends ComponentUpdateOnlyState<Props, State>
         let img = this.state.statePlayer === "playing" ? require('../../../assets/ic_player_pause.png')
             : require('../../../assets/ic_player_play.png');
         return (
-            <Touchable style={[{width: 45, height: 45}, styles.center, this.props.style]}
+            <TouchableOpacity style={[{width: 45, height: 45}, styles.center, this.props.style]}
                        onPress={this.props.onPress}>
                 <Image source={img} style={{width: 45, height: 45, resizeMode: "cover"}}/>
                 {this._renderSpinner()}
-            </Touchable>
+            </TouchableOpacity>
         )
     }
 
