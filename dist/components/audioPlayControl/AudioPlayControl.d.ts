@@ -37,7 +37,7 @@ export declare class AudioPlayControl extends PureComponentSkipFunction<Props, S
     btnPlay: BtnPausePlay;
     seekBarPlayer: SeekBarAudioPlayer;
     currentSound: Sound;
-    private audio;
+    audio: string;
     private PlayerStateChange;
     private currentSpeed;
     private timeInterval;
