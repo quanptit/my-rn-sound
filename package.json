@@ -5,19 +5,24 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "install_npm": "yarn install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "my-rn-sound"
+    "react-native"
   ],
   "author": "Quan Trinh Van",
-  "license": "Quan Trinh Van",
-  "nativePackage": true,
+  "license": "ISC",
+  "homepage": "https://github.com/quanptit/my-rn-sound",
+  "bugs": "https://github.com/quanptit/my-rn-sound/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quanptit/my-rn-sound.git"
+  },
   "dependencies": {
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "peerDependencies": {
-    "react-native-tts": "git+https://gitlab.com/react-native-js-lib/react-native-tts.git"
+    "react-native-tts": "^3.0.0"
   }
 }
