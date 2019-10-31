@@ -1,14 +1,11 @@
 package com.my.rn.sound;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.support.annotation.NonNull;
-
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.appsharelib.KeysAds;
 import com.baseLibs.BaseApplication;
 import com.baseLibs.utils.BaseUtils;
@@ -44,21 +41,28 @@ public class RNSpeedToText extends ReactContextBaseJavaModule implements Recogni
     public void initAndRequestPermision(final Callback callback) { //callback(isSuccess, errorMessage, errorCode)
         if (!SpeechRecognizer.isRecognitionAvailable(getReactApplicationContext())) {
             L.d("Show Dialog: " + (getCurrentActivity() != null));
-            DialogUtils.buildDialog(getCurrentActivity()).content("Sorry! Your device doesn't support speech input")
-                    .negativeText("close (x)")
-                    .positiveText("Add Speech Recognition Now")
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+            DialogUtils.buildDialog(getCurrentActivity()).setMessage("Sorry! Your device doesn't support speech input")
+                    .setNegativeButton("Close (x)", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            DialogUtils.buildDialog(getCurrentActivity()).content("Hãy chạy ứng dụng Voice Search sau khi cài đặt ứng dụng của google").positiveText("OK")
-                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setPositiveButton("Add Speech Recognition Now", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            DialogUtils.showInfoDialog(getReactApplicationContext(),
+                                    "Hãy chạy ứng dụng Voice Search sau khi cài đặt ứng dụng của google",
+                                    new DialogInterface.OnClickListener() {
                                         @Override
-                                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
                                             CommonUtils.openAppFromMarket(getCurrentActivity(), "com.google.android.googlequicksearchbox");
                                         }
-                                    }).show();
+                                    });
                         }
-                    }).show();
+                    }).create().show();
             callback.invoke(false, "Your device doesn't support speech input", 0);
         } else
             callback.invoke(true);
